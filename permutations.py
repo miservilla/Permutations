@@ -70,6 +70,7 @@ def denominator_calc(numlistden):
 def denominator_calc_for_combinations(o, p):
     return math.factorial(p) * math.factorial(o - p)
 
+#Program starts here.
 
 while True:
     selection = input("Select:\n0. for 'Permutations'\n1. for 'Permutations of Subsets'\n2. for 'Permutation of "
