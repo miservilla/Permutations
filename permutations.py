@@ -1,6 +1,7 @@
 import math
 
 
+
 def perm_factorial():
     print("This calculates the number of permutations for a given set using the factorial, !n, function.\n")
     result = (math.factorial(int(input("Enter the size of your set as an integer value 'n': \n"))))
@@ -43,13 +44,9 @@ def perm_of_similar_objects():
         print(f'Your result is {numerator / denominator}.')
 
 
-def combinations():
-    print("This calculates the number of permutations for a given set 'n' and subset 'r'.\n")
-
-    n = int(input("Type in n for set size: \n"))
-    r = int(input("Type in r subset size: \n"))
-
-    print(f'Your result is {math.factorial(n) / denominator_calc_for_combinations(n, r)}')
+def combinations(n, r):
+    choose = math.factorial(n) / denominator_calc_for_combinations(n, r)
+    return choose
 
 
 def numerator_calc(numlistnum):
@@ -71,11 +68,29 @@ def denominator_calc_for_combinations(o, p):
     return math.factorial(p) * math.factorial(o - p)
 
 
+def mybinomial():
+    n = int(input("Type in n for trial size: \n"))
+    p = float(input("Type in p for probability: \n"))
+    fsum = 0.0
+    mean = n * p
+    var = mean * (1 - p)
+    print('Your probability mass function (pmf) results are:\n')
+
+    for i in range(n):
+        f = combinations(n, i) * (p**i) * (1 - p)**(n - i)
+        fsum += f
+        print(f'f({i + 1}) = {round(f, 3)}\n')
+
+    print(f'fsum = {round(fsum, 3)}\n')
+    print(f'mean = {mean}\n')
+    print(f'var = {var}\n')
+
 # Program starts here.
+
 
 while True:
     selection = input("Select:\n0. for 'Permutations'\n1. for 'Permutations of Subsets'\n2. for 'Permutation of "
-                      "Similar Objects'\n3. for 'Combinations'\n'Enter' to quit: \n")
+                      "Similar Objects'\n3. for 'Combinations'\n4. for 'Binomial (discrete)'\n'Enter' to quit: \n")
 
     if selection.isdigit():
         if int(selection) == 0:
@@ -88,7 +103,13 @@ while True:
             perm_of_similar_objects()
             print("\n")
         elif int(selection) == 3:
-            combinations()
+            print("\nThis calculates the number of permutations for a given set 'n' and subset 'r'.\n")
+            n = int(input("Type in n for set size: \n"))
+            r = int(input("Type in r subset size: \n"))
+            choose = combinations(n, r)
+            print(f"Your result is {choose}\n")
+        elif int(selection) == 4:
+            mybinomial()
             print("\n")
         else:
             print("Incorrect value!")
