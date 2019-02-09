@@ -1,5 +1,6 @@
 import math
-
+import matplotlib.pyplot as plt
+import numpy
 
 
 def perm_factorial():
@@ -71,19 +72,39 @@ def denominator_calc_for_combinations(o, p):
 def mybinomial():
     n = int(input("Type in n for trial size: \n"))
     p = float(input("Type in p for probability: \n"))
-    fsum = 0.0
     mean = n * p
     var = mean * (1 - p)
+    f_sum = 0.0
+    f_list = []
+    f_dict = {}
     print('Your probability mass function (pmf) results are:\n')
-
     for i in range(n):
-        f = combinations(n, i) * (p**i) * (1 - p)**(n - i)
-        fsum += f
-        print(f'f({i + 1}) = {round(f, 3)}\n')
-
-    print(f'fsum = {round(fsum, 3)}\n')
+        f = round(combinations(n, i) * (p**i) * (1 - p)**(n - i), 3)
+        f_list.append(f)
+        f_dict[i + 1] = f
+        f_sum += f
+        print(f'f({i + 1}) = {f}\n')
+    print(f'fsum = {sum(f_list)}\n')
     print(f'mean = {mean}\n')
     print(f'var = {var}\n')
+    p_range = input("Do you wish to calculate probability range [Y/N]:\n")
+    if p_range.upper() == 'Y':
+        lower_range = int(input("Enter lower value, lower < P(X) < int:\n"))
+        upper_range = int(input("Enter upper value, int < P(X) < upper:\n"))
+        print(f'P({lower_range} < X < {upper_range}) is {round(sum(f_list[lower_range:upper_range]), 3)}')
+    p_plot = input("Do you wish to plot pmf [Y/N]:\n")
+    if p_plot.upper() == 'Y':
+        f_list.insert(0, 0)
+        dim = numpy.arange(1, len(f_list), 1)
+        ax = plt.subplot(111)
+        ax.set_xlim(1, len(f_list) - 1)
+        plt.plot(f_list, "o-")
+        plt.xticks(dim)
+        plt.ylabel("Probability")
+        plt.xlabel("f(x) Values of pmf")
+        plt.title("Probability Mass Function")
+        plt.show()
+
 
 # Program starts here.
 
