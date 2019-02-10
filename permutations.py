@@ -83,7 +83,7 @@ def mybinomial():
         f_list.append(f)
         f_dict[i + 1] = f
         f_sum += f
-        print(f'f({i + 1}) = {f}\n')
+        print(f'f({i}) = {f}\n')
     print(f'fsum = {sum(f_list)}\n')
     print(f'mean = {mean}\n')
     print(f'var = {var}\n')
