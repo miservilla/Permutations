@@ -87,11 +87,17 @@ def mybinomial():
     print(f'fsum = {sum(f_list)}\n')
     print(f'mean = {mean}\n')
     print(f'var = {var}\n')
-    p_range = input("Do you wish to calculate probability range [Y/N]:\n")
-    if p_range.upper() == 'Y':
-        lower_range = int(input("Enter lower value, lower < P(X) < int:\n"))
-        upper_range = int(input("Enter upper value, int < P(X) < upper:\n"))
-        print(f'P({lower_range} < X < {upper_range}) is {round(sum(f_list[lower_range:upper_range]), 3)}')
+    while True:
+        p_range = input("Do you wish to calculate probability range [Y/N]:\n")
+        if p_range.upper() == 'Y':
+            lower_range = int(input("Enter lower value, lower <= P(X) <= int:\n"))
+            upper_range = int(input("Enter upper value, int <= P(X) <= upper:\n"))
+            if (lower_range >= 0 or lower_range <= n - 2) and (lower_range < upper_range <= n):
+                print(f'P({lower_range} <= X <= {upper_range}) is {round(sum(f_list[lower_range:upper_range + 1]), 3)}')
+            else:
+                print("Incorrect range values!")
+        else:
+            break
     p_plot = input("Do you wish to plot pmf [Y/N]:\n")
     if p_plot.upper() == 'Y':
         f_list.insert(0, 0)
